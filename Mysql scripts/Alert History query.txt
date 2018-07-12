@@ -1,0 +1,14 @@
+#The below illustration shows the tables we will be using and the nature of the joins
+
+
+
+> select DISTINCT(events.eventid), CONVERT(from_unixtime(events.clock, "%Y-%m-%d %H:%i:%s"), DATETIME) AS Date_Time, triggers.description, hosts.host
+FROM events, triggers, functions, items, hosts
+WHERE
+events.source=0 AND events.value=1 AND CONVERT(from_unixtime(events.clock, "%Y-%m-%d"), DATE) BETWEEN date('2018-07-01') AND date('2018-07-10') AND
+events.objectid = triggers.triggerid AND
+events.objectid = functions.triggerid AND
+functions.itemid = items.itemid AND
+items.hostid = hosts.hostid
+ORDER BY Date_Time DESC
+INTO OUTFILE '/var/lib/mysql-files/report.csv' FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n';
