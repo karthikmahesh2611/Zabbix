@@ -1,0 +1,17 @@
+#mysql query for pulling all hosts and ip address based on hostgroup
+
+
+########################################################################
+
+
+select DISTINCT(hosts_groups.hostid), hosts.host, interface.ip 
+FROM hosts_groups, hosts, interface
+WHERE 
+hosts_groups.groupid IN (select groupid from groups where name IN (
+'HOST GROUP 1',
+'HOST GROUP 2',
+)) AND
+hosts_groups.hostid = hosts.hostid AND
+hosts_groups.hostid = interface.hostid AND
+hosts.status = 0 
+INTO OUTFILE '/var/lib/mysql-files/report.csv' FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n';
