@@ -1,6 +1,6 @@
 ## Zabbix
 Zabbix is an Enterprise class Open Source IT infrastructure moitoring solution.
-It is powerfull tool that provides huge flexibility to System Admins to design and deploy their IT monitoring setup.
+It is powerful tool that provides huge flexibility to System Admins to design and deploy their IT monitoring setup.
 It provides a full stack solution to monitor everything from servers, storage, applications and network.
 
 
